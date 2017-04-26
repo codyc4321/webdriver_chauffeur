@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='webdriver-chauffeur',
-    version='0.1.1',
+    version='0.1.2',
     description='Convenience functions for using Selenium Webdriver',
     url='https://github.com/codyc4321/webdriver_chauffeur',
     author='codyc4321',

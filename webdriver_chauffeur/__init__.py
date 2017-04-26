@@ -213,3 +213,6 @@ class ChromeDriver(WebdriverChauffeurMixin, webdriver.Chrome):
 
 class FirefoxDriver(WebdriverChauffeurMixin, webdriver.Firefox):
     pass
+
+
+__all__ = ["WebdriverChauffeurMixin", "ChromeDriver", "FirefoxDriver"]
