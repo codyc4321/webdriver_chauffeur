@@ -1,1 +1,1 @@
-A wrapper around Selenium Webdriver that gives many convenience functions
+A search/matching package that doesn't have to be exact but finds the correct result anyways

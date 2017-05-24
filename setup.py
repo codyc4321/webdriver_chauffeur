@@ -1,16 +1,16 @@
 from setuptools import setup
 
 setup(
-    name='webdriver-chauffeur',
-    version='0.1.2',
-    description='Convenience functions for using Selenium Webdriver',
-    url='https://github.com/codyc4321/webdriver_chauffeur',
+    name='fuzzywuzzy',
+    version='0.1.0',
+    description='Fuzzy textsearch/cli interactivity that works for humans',
+    url='https://github.com/codyc4321/fuzzywuzzy',
     author='codyc4321',
     author_email='cchilder@mail.usf.edu',
     license='MIT',
-    packages=['webdriver_chauffeur'],
+    packages=['fuzzywuzzy'],
     install_requires=[
-        'bs4', 'selenium'
+
     ],
     zip_safe=False,
 )
