@@ -16,24 +16,32 @@ https://seleniumhq.github.io/selenium/docs/api/py/webdriver/selenium.webdriver.c
 """
 
 
-class WebdriverChauffeurMixin(object):
+
+class WebdriverChauffuerMixin(object):
 
     @property
     def soup(self, **kwargs):
         return BeautifulSoup(self.page_source, 'html.parser')
 
     def locate_element(self, search_text=None, xpath=None):
+        """ perform a logical search, in order of:
+
+                id
+                name
+                class name
+                some common xpaths
+
+        if you give an `xpath` argument, it will search by your xpath
+        """
         if not xpath:
             xpaths = [
                 "//input[@value='{text}']",
                 "//button[normalize-space(text())='{text}']",
                 "//a[child::span[normalize-space(text())='{text}']]",
                 "//a[normalize-space(text())='{text}']",
-                # "//button[contains(.,'{text}')]",
-                # "//input[contains(.,'{text}')]",
-                "//*[contains(@id,'{text}')]",
-                "//*[contains(@class,'{text}')]",
-                "//*[contains(.,'{text}')]",
+                "//button[contains(.,'{text}')]",
+                "//input[contains(.,'{text}')]",
+                "//span[contains(.,'{text}')]",
             ]
         else:
             return self.find_element_by_xpath(xpath)
@@ -148,12 +156,14 @@ class WebdriverChauffeurMixin(object):
         if not isinstance(selection, bool):
              selection = str(selection)
         element = self.locate_element(search_text)
+        if not element:
+            raise Exception("Error...element missing inside complete_field() of WebdriverChauffuerMixin")
         tag_type = element.tag_name
         if tag_type == 'input':
             input_type = element.get_attribute('type')
             if input_type == 'checkbox':
                 if selection:
-                    self.click_anything(search_text)
+                    self.click_button(search_text)
             elif input_type in ['text', 'textarea', 'number']:
                 self.find_box_and_fill(selection, search_text=search_text)
             else:
@@ -206,9 +216,9 @@ class WebdriverChauffeurMixin(object):
         return text in self.soup.encode_contents()
 
 
-class ChromeDriver(WebdriverChauffeurMixin, webdriver.Chrome):
+class ChromeDriver(WebdriverChauffuerMixin, webdriver.Chrome):
     pass
 
 
-class FirefoxDriver(WebdriverChauffeurMixin, webdriver.Firefox):
+class FirefoxDriver(WebdriverChauffuerMixin, webdriver.Firefox):
     pass
