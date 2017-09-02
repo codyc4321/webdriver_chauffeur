@@ -206,7 +206,7 @@ class WebdriverChauffeurMixin(object):
         return text in self.soup.encode_contents()
 
 
-class =(WebdriverChauffeurMixin, webdriver.Chrome):
+class ChromeDriver(WebdriverChauffeurMixin, webdriver.Chrome):
     pass
 
 
